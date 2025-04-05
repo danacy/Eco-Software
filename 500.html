@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Error 500 - Error interno del servidor</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background-color: #101010;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .container {
+      position: relative;
+      max-width: 600px;
+      padding: 20px;
+    }
+
+    .number-500 {
+      font-size: 180px;
+      font-weight: bold;
+      color: #bbbbbb;
+      text-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
+      margin-bottom: 20px;
+      letter-spacing: -5px;
+      transition: transform 0.1s ease-out;
+    }
+
+    .message {
+      font-size: 26px;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+
+    .submessage {
+      font-size: 16px;
+      color: #aaaaaa;
+      margin-bottom: 40px;
+      line-height: 1.6;
+      max-width: 500px;
+    }
+
+    .home-button {
+      background-color: #2a2a2a;
+      color: #ffffff;
+      border: none;
+      padding: 12px 40px;
+      font-size: 16px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .home-button:hover {
+      background-color: #3a3a3a;
+      transform: scale(1.05);
+    }
+
+    .glow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(200, 200, 200, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
+      z-index: -1;
+      transition: transform 0.2s ease-out;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="glow"></div>
+    <div class="number-500">500</div>
+    <div class="message">Error interno del servidor</div>
+    <div class="submessage">Lo sentimos, algo salió mal en el servidor. Nuestro equipo ya está trabajando para solucionarlo. Intenta de nuevo más tarde.</div>
+    <a href="respaldo.html" class="home-button">VOLVER AL INICIO</a>
+  </div>
+
+  <script>
+    document.addEventListener('mousemove', (e) => {
+      const number = document.querySelector('.number-500');
+      const glow = document.querySelector('.glow');
+      
+      const mouseX = e.clientX / window.innerWidth - 0.5;
+      const mouseY = e.clientY / window.innerHeight - 0.5;
+
+      number.style.transform = `translate(${mouseX * 15}px, ${mouseY * 15}px)`;
+      glow.style.transform = `translate(${mouseX * 25}px, ${mouseY * 25}px)`;
+    });
+  </script>
+</body>
+</html>

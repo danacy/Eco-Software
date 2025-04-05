@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registro EcoSoftware</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)),
+        url('img/registro.avif');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      display: flex;
+      max-width: 1000px;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+      overflow: hidden;
+      flex-wrap: wrap;
+    }
+
+    .left-content {
+      flex: 1;
+      color: white;
+      padding: 40px;
+      min-width: 300px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .logo span {
+      font-size: 28px;
+      color: #4CEF33;
+    }
+
+    .slogan {
+      font-size: 36px;
+      font-weight: bold;
+    }
+
+    .form-container {
+      flex: 1;
+      background-color: rgba(33, 33, 33, 0.9);
+      padding: 40px;
+      color: white;
+      min-width: 300px;
+    }
+
+    .form-title {
+      font-size: 26px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 10px;
+      background: #333;
+      border: none;
+      border-radius: 5px;
+      color: white;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #4CEF33;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #3bd72c;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid #4CEF33;
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(76, 239, 51, 0.1);
+    }
+
+    .password-container {
+      position: relative;
+    }
+
+    .eyeicon {
+      position: absolute;
+      top: 0;
+      right: 10px;
+      height: 140%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #ccc;
+    }
+
+    .eyeicon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .step-initial,
+    .citizen-form,
+    .company-form {
+      display: none;
+    }
+
+    .step-initial.active,
+    .citizen-form.active,
+    .company-form.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        background: #1e1e1e;
+      }
+
+      .slogan {
+        font-size: 24px;
+        text-align: center;
+      }
+
+      .logo {
+        justify-content: center;
+      }
+
+      .left-content {
+        padding: 20px;
+        text-align: center;
+      }
+
+      .form-container {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="left-content">
+      <div class="logo">
+        <span>EcoSoftware</span>
+      </div>
+      <h1 class="slogan">Únete a los <b>Ecosofistas</b><br>y hagamos el cambio juntos.</h1>
+    </div>
+
+    <div class="form-container">
+      <!-- Paso inicial -->
+      <div class="step-initial active" id="stepInitial">
+        <h2 class="form-title">Pronto serás un Ecosofista <span class="plant-icon"></span></h2>
+        <div class="form-group"><h3>¿Quién eres?</h3></div>
+        <button class="btn" onclick="showUserType('citizen')">Quiero reciclar</button>
+        <button class="btn btn-secondary" onclick="showUserType('company')">Yo transformo el reciclaje</button>
+      </div>
+
+      <!-- Formulario ciudadano -->
+      <div class="citizen-form" id="citizenForm">
+        <h2 class="form-title">Registro Ciudadano <span class="plant-icon">🌱</span></h2>
+        <div class="form-group"><label>Nombre Completo</label><input type="text" id="citizenName" /></div>
+        <div class="form-group"><label>Correo Electrónico</label><input type="email" id="citizenEmail" /></div>
+        <div class="form-group"><label>Teléfono</label><input type="tel" id="citizenPhone" /></div>
+        <div class="form-group"><label>Dirección</label><input type="text" id="citizenAddress" /></div>
+        <div class="form-group password-container">
+          <label>Contraseña</label>
+          <input type="password" id="citizenPassword" />
+          <span class="eyeicon" onclick="togglePassword('citizenPassword')">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+          </span>
+        </div>
+        <button class="btn" onclick="register('citizen')">Registrarse</button>
+        <button class="btn btn-secondary" onclick="goBack()">Volver</button>
+      </div>
+
+      <!-- Formulario empresa -->
+      <div class="company-form" id="companyForm">
+        <h2 class="form-title">Registro Empresa <span class="plant-icon">🌱</span></h2>
+        <div class="form-group"><label>Nombre Empresa</label><input type="text" id="companyName" /></div>
+        <div class="form-group">
+          <label>Tipo de Empresa</label>
+          <select id="companyType">
+            <option value="" disabled selected>Seleccione tipo</option>
+            <option value="recicladora">Recicladora</option>
+            <option value="recolector">Recolector</option>
+            <option value="transformador">Transformador</option>
+          </select>
+        </div>
+        <div class="form-group"><label>RUT</label><input type="text" id="companyRut" /></div>
+        <div class="form-group"><label>Correo Electrónico</label><input type="email" id="companyEmail" /></div>
+        <div class="form-group"><label>Teléfono</label><input type="tel" id="companyPhone" /></div>
+        <div class="form-group"><label>Dirección</label><input type="text" id="companyAddress" /></div>
+        <div class="form-group password-container">
+          <label>Contraseña</label>
+          <input type="password" id="companyPassword" />
+          <span class="eyeicon" onclick="togglePassword('companyPassword')">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+          </span>
+        </div>
+        <button class="btn" onclick="register('company')">Registrarse</button>
+        <button class="btn btn-secondary" onclick="goBack()">Volver</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showUserType(type) {
+      document.getElementById('stepInitial').classList.remove('active');
+      document.getElementById('citizenForm').classList.remove('active');
+      document.getElementById('companyForm').classList.remove('active');
+      if (type === 'citizen') {
+        document.getElementById('citizenForm').classList.add('active');
+      } else if (type === 'company') {
+        document.getElementById('companyForm').classList.add('active');
+      }
+    }
+  
+    function goBack() {
+      document.getElementById('stepInitial').classList.add('active');
+      document.getElementById('citizenForm').classList.remove('active');
+      document.getElementById('companyForm').classList.remove('active');
+    }
+  
+    function togglePassword(id) {
+      const input = document.getElementById(id);
+      input.type = input.type === "password" ? "text" : "password";
+    }
+  
+    function register(type) {
+      let valid = true;
+      let data = {};
+  
+      if (type === "citizen") {
+        const name = document.getElementById("citizenName");
+        const email = document.getElementById("citizenEmail");
+        const phone = document.getElementById("citizenPhone");
+        const address = document.getElementById("citizenAddress");
+        const password = document.getElementById("citizenPassword");
+  
+        // Validaciones
+        if (name.value.trim() === "") {
+          showToast("❌ El nombre es obligatorio.");
+          valid = false;
+        } else if (!email.value.includes('@')) {
+          showToast("❌ El correo no es válido.");
+          valid = false;
+        } else if (phone.value.trim() === "") {
+          showToast("❌ El teléfono es obligatorio.");
+          valid = false;
+        } else if (address.value.trim() === "") {
+          showToast("❌ La dirección es obligatoria.");
+          valid = false;
+        } else if (password.value.length < 8) {
+          showToast("❌ La contraseña debe tener al menos 8 caracteres.");
+          valid = false;
+        }
+  
+        if (!valid) return;
+  
+        data = {
+          name: name.value.trim(),
+          email: email.value.trim(),
+          phone: phone.value.trim(),
+          address: address.value.trim(),
+          password: password.value
+        };
+      }
+  
+      if (type === "company") {
+        const name = document.getElementById("companyName");
+        const companyType = document.getElementById("companyType");
+        const rut = document.getElementById("companyRut");
+        const email = document.getElementById("companyEmail");
+        const phone = document.getElementById("companyPhone");
+        const address = document.getElementById("companyAddress");
+        const password = document.getElementById("companyPassword");
+  
+        // Validaciones
+        if (name.value.trim() === "") {
+          showToast("❌ El nombre de la empresa es obligatorio.");
+          valid = false;
+        } else if (!companyType.value) {
+          showToast("❌ Seleccione un tipo de empresa.");
+          valid = false;
+        } else if (rut.value.trim() === "") {
+          showToast("❌ El RUT es obligatorio.");
+          valid = false;
+        } else if (!email.value.includes('@')) {
+          showToast("❌ El correo no es válido.");
+          valid = false;
+        } else if (phone.value.trim() === "") {
+          showToast("❌ El teléfono es obligatorio.");
+          valid = false;
+        } else if (address.value.trim() === "") {
+          showToast("❌ La dirección es obligatoria.");
+          valid = false;
+        } else if (password.value.length < 8) {
+          showToast("❌ La contraseña debe tener al menos 8 caracteres.");
+          valid = false;
+        }
+  
+        if (!valid) return;
+  
+        data = {
+          name: name.value.trim(),
+          type: companyType.value,
+          rut: rut.value.trim(),
+          email: email.value.trim(),
+          phone: phone.value.trim(),
+          address: address.value.trim(),
+          password: password.value
+        };
+      }
+  
+      // Simulación de registro exitoso
+      console.log("Registro exitoso:", data);
+      showToast("✅ ¡Registro exitoso!");
+    }
+  
+    function showToast(message) {
+      let toast = document.getElementById('toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toast';
+        toast.className = 'toast';
+        document.body.appendChild(toast);
+      }
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+  </script>
+  
+  <style>
+    .toast {
+      visibility: hidden;
+      min-width: 280px;
+      margin-left: -140px;
+      background-color: #222;
+      color: #fff;
+      text-align: center;
+      border-radius: 8px;
+      padding: 16px;
+      position: fixed;
+      z-index: 1000;
+      left: 50%;
+      bottom: 30px;
+      font-size: 16px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+    }
+  
+    .toast.show {
+      visibility: visible;
+      bottom: 50px;
+      opacity: 1;
+    }
+  </style>
+  
+</body>
+</html>
+
+

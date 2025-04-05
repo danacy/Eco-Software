@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html lang="es">
+   
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoSoftware</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-recycle"></i>
+            <span>EcoSoftware</span>
+        </div>
+        <nav id="nav">
+            <ul class="menu">
+                <li><a href="#" class="center">Inicio</a></li>
+                <li><a href="#" class="center">Servicios</a></li>
+                <a href="registro.html" class="btn btn-primary"><i class="fas fa-user-plus"></i> Registrarse</a>
+                <a href="iniciarsesion.html" class="btn btn-secondary"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a>
+                </li>
+            </ul>
+            <div class="user-profile" id="user-profile" style="display: none;">
+                <button class="user-icon" id="profile-btn">U</button>
+                <div class="profile-dropdown" id="profile-dropdown" style="display: none;">
+                    <a href="#">Mi Perfil</a>
+                    <a href="#">Editar Perfil</a>
+                    <a href="#">Configuración</a>
+                    <a href="#" id="logout-btn">Cerrar Sesión</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" id="inicio">
+        <h1>Transformando el mundo, un residuo a la vez</h1>
+        <p>EcoSoftware es tu compañero ideal para aprender sobre reciclaje, encontrar puntos de recolección y contribuir
+            a un planeta más limpio y sostenible.</p>
+        <div class="cta-buttons">
+            
+        </div>
+    </section>
+
+    <section class="services" id="servicios">
+        <h2 class="section-title">Nuestros Servicios</h2>
+        <div class="cards-container">
+            <div class="card">
+                <div class="card-img">
+                    <img src="img/capacitación.png" alt="Capacitaciones de reciclaje">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Capacitaciones</h3>
+                    <p class="card-text">Aprende todo sobre el reciclaje con nuestros cursos y talleres online para
+                        todas las edades. Expertos en sostenibilidad te guiarán en este camino verde.</p>
+                    <a href="#" class="btn btn-primary">Ver Cursos</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <img src="img/Puntos.png" alt="Puntos de reciclaje">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Puntos de Reciclaje</h3>
+                    <p class="card-text">Encuentra los puntos de reciclaje más cercanos a tu ubicación y contribuye con
+                        el medio ambiente depositando tus residuos correctamente.</p>
+                    <a href="#" class="btn btn-primary">Ver Mapa</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <img src="img/Solicitud.png" alt="Solicitud de recolección">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Solicitud de Recolección</h3>
+                    <p class="card-text">¿Tienes muchos residuos reciclables? Solicita nuestro servicio de recolección y
+                        nosotros nos encargamos de llevarlos al lugar adecuado.</p>
+                    <a href="#" class="btn btn-primary">Solicitar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="map-section" id="puntos">
+        <h2 class="section-title">Puntos de Reciclaje</h2>
+        <div class="map-container" style="height: 400px; width: 100%; border-radius: 12px; overflow: hidden;">
+            <div id="map" style="height: 100%; width: 100%;"></div>
+        </div>
+    </section>
+
+    <section class="Datos">
+        <div class="recycling-facts">
+            <h3 class="section-title">Datos interesantes sobre reciclaje</h3>
+            <div class="facts-carousel" id="factsCarousel">
+
+                <div class="fact-card active">
+                    <div class="fact-icon"><i class="fa-solid fa-tree"></i></div>
+                    <p class="fact-text">Reciclar una tonelada de papel puede salvar aproximadamente 17 árboles.</p>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-icon"><i class="fa-solid fa-droplet"></i></div>
+                    <p class="fact-text">La fabricación de papel reciclado consume 62% menos energía y 86% menos agua.
+                    </p>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-icon"><i class="fa-solid fa-recycle"></i></div>
+                    <p class="fact-text">Colombia produce 12 millones de toneladas de residuos al año, solo 17% se
+                        recicla.</p>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-icon"><i class="fas fa-jug-detergent"></i></div>
+                    <p class="fact-text">Reciclar una lata de aluminio ahorra energía suficiente para 3 horas de TV.</p>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-icon"><i class="fas fa-earth-americas"></i></div>
+                    <p class="fact-text">La basura electrónica representa el 70% de residuos tóxicos a nivel mundial.
+                    </p>
+                </div>
+            </div>
+            <div class="fact-dots" id="factDots">
+                <div class="fact-dot active"></div>
+                <div class="fact-dot"></div>
+                <div class="fact-dot"></div>
+                <div class="fact-dot"></div>
+                <div class="fact-dot"></div>
+            </div>
+            <div class="facts-controls">
+                <button class="fact-btn" id="prevFact"><i class="fas fa-chevron-left"></i></button>
+                <button class="fact-btn" id="nextFact"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <section class="quick-access" id="Únete">
+        <h2>Únete a la Comunidad Ecosofistas</h2>
+        <div class="quick-buttons">
+            <a href="registro.html" class="quick-btn"><i class="fas fa-map-marker-alt"></i> Regístrate</a>
+        </div>
+    </section>
+
+    <footer id="unete">
+        <div class="copyright">
+            <p>&copy; 2025 EcoSoftware. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+
+    <button id="theme-toggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
+
+    <script>
+        const mobileMenu = document.getElementById('mobile-menu');
+        const nav = document.getElementById('nav');
+
+        if (mobileMenu) {
+            mobileMenu.addEventListener('click', () => {
+                nav.classList.toggle('active');
+                mobileMenu.innerHTML = nav.classList.contains('active')
+                    ? '<i class="fas fa-times"></i>'
+                    : '<i class="fas fa-bars"></i>';
+            });
+        }
+
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        if (themeToggle) {
+            if (localStorage.getItem('dark-mode') === 'true') {
+                body.classList.add('dark-mode');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                const isDark = body.classList.contains('dark-mode');
+                themeToggle.innerHTML = isDark
+                    ? '<i class="fas fa-sun"></i>'
+                    : '<i class="fas fa-moon"></i>';
+                localStorage.setItem('dark-mode', isDark);
+            });
+        }
+
+        const backToTop = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('active', window.scrollY > 300);
+        });
+        backToTop.addEventListener('click', e => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        const cards = document.querySelectorAll('.card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.animation = `fadeUp 0.8s forwards`;
+                        entry.target.style.opacity = 1;
+                    }, index * 200);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        cards.forEach(card => observer.observe(card));
+
+        const map = L.map('map').setView([4.711, -74.0721], 12);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        const puntosReciclaje = [
+            { nombre: 'Punto Kennedy', lat: 4.6292, lng: -74.1572 },
+            { nombre: 'Punto Chapinero', lat: 4.6486, lng: -74.0570 },
+            { nombre: 'Punto Suba', lat: 4.7450, lng: -74.0918 },
+            { nombre: 'Punto Usaquén', lat: 4.7064, lng: -74.0301 },
+            { nombre: 'Punto Bosa', lat: 4.6126, lng: -74.1909 }
+        ];
+        puntosReciclaje.forEach(punto => {
+            L.marker([punto.lat, punto.lng])
+                .addTo(map)
+                .bindPopup(`<strong>${punto.nombre}</strong><br>Reciclaje disponible aquí.`);
+        });
+
+        let currentFactIndex = 0;
+        const facts = document.querySelectorAll('.fact-card');
+        const dots = document.querySelectorAll('.fact-dot');
+        const totalFacts = facts.length;
+
+        function showFact(index) {
+            facts[currentFactIndex].classList.remove('active');
+            facts[currentFactIndex].classList.add('prev');
+            dots[currentFactIndex].classList.remove('active');
+
+            currentFactIndex = index;
+            facts[currentFactIndex].classList.remove('prev');
+            facts[currentFactIndex].classList.add('active');
+            dots[currentFactIndex].classList.add('active');
+        }
+
+        document.getElementById('nextFact').addEventListener('click', () => {
+            showFact((currentFactIndex + 1) % totalFacts);
+        });
+
+        document.getElementById('prevFact').addEventListener('click', () => {
+            showFact((currentFactIndex - 1 + totalFacts) % totalFacts);
+        });
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => showFact(index));
+        });
+
+        let factInterval = setInterval(() => {
+            showFact((currentFactIndex + 1) % totalFacts);
+        }, 8000);
+
+        const factsCarousel = document.getElementById('factsCarousel');
+        factsCarousel.addEventListener('mouseenter', () => {
+            clearInterval(factInterval);
+        });
+
+        factsCarousel.addEventListener('mouseleave', () => {
+            factInterval = setInterval(() => {
+                showFact((currentFactIndex + 1) % totalFacts);
+            }, 8000);
+        });
+    </script>
+</body>
+
+</html>
